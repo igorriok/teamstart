@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:id="@+id/newEvent"
+    android:background="@color/grey_300">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_300"
+        android:contentDescription="@string/app_name"
+        android:padding="12dp"
+        android:elevation="4dp"
+        android:text="New event"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:ems="12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_300"
+        android:ems="2"
+        android:gravity="end"
+        android:padding="12dp"
+        android:elevation="4dp"
+        android:text="Save"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/header"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/eventName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:hint="Event's name"
+        android:inputType="textAutoComplete"
+        android:scaleType="center"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/header"/>
+
+    <Button
+        android:id="@+id/eventDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:layout_marginEnd="4dp"
+        android:ems="7"
+        android:padding="8dp"
+        android:scaleType="center"
+        android:elevation="4dp"
+        android:text="Date"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/eventTime"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+    <Button
+        android:id="@+id/eventTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:ems="7"
+        android:padding="8dp"
+        android:scaleType="center"
+        android:elevation="4dp"
+        android:text="Time"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/eventDate"
+        app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventTime">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/emailList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="8dp"
+            android:padding="8dp">
+
+            <EditText
+                android:id="@+id/email1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:ems="15"
+                android:hint="add participant"
+                android:inputType="textEmailAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:elevation="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/email1"
+                app:srcCompat="@android:drawable/ic_input_add" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

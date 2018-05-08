@@ -1,0 +1,32 @@
+{
+  "events": [
+    {
+      "name": "first",
+      "date": "2018-07-04T12:08",
+      "participants": [
+        {
+          "email": "i.solonari@gmail.com",
+          "status": 0
+        },
+        {
+          "email": "i.solonari@hotmail.com",
+          "status": 1
+        }
+      ]
+    },
+    {
+      "name": "second",
+      "date": "2018-03-15T15:30",
+      "participants": [
+        {
+          "email": "i.solonari@gmail.com",
+          "status": 0
+        },
+        {
+          "email": "i.solonari@hotmail.com",
+          "status": 3
+        }
+      ]
+    }
+  ]
+}

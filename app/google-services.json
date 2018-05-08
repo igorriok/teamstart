@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "449520244524",
+    "firebase_url": "https://teamstart-201a7.firebaseio.com",
+    "project_id": "teamstart-201a7",
+    "storage_bucket": "teamstart-201a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:449520244524:android:046a55214ebebab4",
+        "android_client_info": {
+          "package_name": "com.igorsolonari.teamstart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "449520244524-b12upritnatbjakd67sje3riqnd5i5k9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.igorsolonari.teamstart",
+            "certificate_hash": "b8ed5d0e465ae9e2c3067224f0a45a5b6d0f04e2"
+          }
+        },
+        {
+          "client_id": "449520244524-0cojds2a3vdem196vtk4v6f70jsslpg7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeak-rl_hAzhxHodvFmwofjTS7DpoMlMU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "449520244524-0cojds2a3vdem196vtk4v6f70jsslpg7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
