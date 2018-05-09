@@ -6,6 +6,9 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -20,6 +23,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +42,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class NewEventActivity extends BaseActivity implements View.OnClickListener,
         TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
@@ -76,7 +89,14 @@ public class NewEventActivity extends BaseActivity implements View.OnClickListen
             }
         });
 
-
+        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        if (networkInfo == null || !networkInfo.isConnected() ||
+                (networkInfo.getType() != ConnectivityManager.TYPE_WIFI
+                        && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
+            // If no connectivity, cancel task and update Callback with null data.;
+            saveEvent.setText("No");
+        }
     }
 
     @Override
@@ -111,6 +131,41 @@ public class NewEventActivity extends BaseActivity implements View.OnClickListen
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                HashMap<String, String> data = new HashMap<>();
+                data.put("str1", "obj1");
+                data.put("str2", "obj2");
+
+                // Instantiate the RequestQueue.
+                RequestQueue queue = Volley.newRequestQueue(this);
+                String url ="http://192.168.0.100:57349/addevent";
+
+                // Request a string response from the provided URL.
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(data),
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // Display the first 500 characters of the response string.
+                                saveEvent.setText("Response is");
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        saveEvent.setText("That didn't work!");
+                        error.printStackTrace();
+                    }
+                }){ //no semicolon or coma
+                    @Override
+                    public HashMap<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> params = new HashMap<String, String>();
+                        params.put("Content-Type", "application/json");
+                        params.put("token", "token");
+                        return params;
+                    }
+                };
+
+                // Add the request to the RequestQueue.
+                queue.add(jsonObjectRequest);
                 break;
             default:
                 break;
