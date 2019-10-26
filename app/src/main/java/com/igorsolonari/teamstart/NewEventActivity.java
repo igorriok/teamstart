@@ -7,6 +7,8 @@ import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -16,6 +18,7 @@ import android.support.constraint.ConstraintSet;
 import android.support.design.widget.FloatingActionButton;
 import android.text.InputType;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -57,6 +60,9 @@ public class NewEventActivity extends BaseActivity implements View.OnClickListen
     ProgressDialog pDialog;
     ConstraintLayout mainLayout;
     FloatingActionButton fab;
+    private String idToken;
+    protected static final String PREF_FILE = "PREF_FILE";
+    private static String TAG = "NewEvent activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +103,19 @@ public class NewEventActivity extends BaseActivity implements View.OnClickListen
             // If no connectivity, cancel task and update Callback with null data.;
             saveEvent.setText("No");
         }
+        SharedPreferences settings = getSharedPreferences(PREF_FILE, 0);
+        idToken = settings.getString("Token", "");
+        if (idToken.equals("")) {
+            Log.d(TAG, "idToken is empty");
+            goToSignIn();
+        } else {
+            Log.d(TAG, "idToken is: " + idToken);
+        }
+    }
+
+    private void goToSignIn() {
+        Intent signInIntent = new Intent(NewEventActivity.this, SignInActivity.class);
+        startActivity(signInIntent);
     }
 
     @Override
@@ -159,7 +178,7 @@ public class NewEventActivity extends BaseActivity implements View.OnClickListen
                     public HashMap<String, String> getHeaders() throws AuthFailureError {
                         HashMap<String, String> params = new HashMap<String, String>();
                         params.put("Content-Type", "application/json");
-                        params.put("token", "token");
+                        params.put("token", idToken);
                         return params;
                     }
                 };
